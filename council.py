@@ -8,12 +8,10 @@ def carregar_personas():
     personas = {}
     for ficheiro in PERSONAS_DIR.glob("*.txt"):
         nome = ficheiro.stem
-        # Lê os ficheiros txt que criaste
         personas[nome] = ficheiro.read_text(encoding="utf-8").strip()
     return personas
 
 def perguntar_persona(nome, system_prompt, pergunta):
-    # O Ollama usa um formato de mensagens parecido com um chat
     response = ollama.chat(model=MODEL, messages=[
         {'role': 'system', 'content': system_prompt},
         {'role': 'user', 'content': pergunta}
